@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <title>Student Data Collection</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: "Noto Sans", Arial, sans-serif; background:#f4f6f8; padding:20px; }
+    .container { max-width:900px; margin:0 auto; background:white; padding:24px; border-radius:8px; box-shadow:0 4px 18px rgba(0,0,0,0.08); }
+    h1 { margin:0 0 8px 0; font-size:22px; }
+    p.desc { color:#333; line-height:1.5; margin-bottom:18px; white-space:pre-wrap; }
+    label { display:block; font-weight:600; margin-top:12px; }
+    input[type="text"], input[type="date"], input[type="tel"], select, textarea, input[type="number"] {
+      width:100%; padding:8px 10px; margin-top:6px; box-sizing:border-box; border:1px solid #ccd0d6; border-radius:6px;
+    }
+    textarea { min-height:100px; }
+    .row { display:flex; gap:12px; }
+    .col { flex:1; }
+    .small { width:160px; }
+    .note { font-size:13px; color:#666; margin-top:8px; }
+    .buttons { margin-top:18px; display:flex; gap:12px; }
+    button { padding:10px 14px; border-radius:6px; border:0; cursor:pointer; font-weight:600; }
+    button.primary { background:#1f6feb; color:white; }
+    button.secondary { background:#e6eefc; color:#1f6feb; }
+    .success { background:#e6ffef; padding:10px; border-radius:6px; margin-top:12px; color:#06643a; display:none; }
+    .error { background:#fff1f0; padding:10px; border-radius:6px; margin-top:12px; color:#8b0f0f; display:none; }
+    .inline { display:inline-block; margin-right:12px; }
+    .checkbox-list label, .radio-list label { font-weight:500; display:block; margin-top:6px; }
+  </style>
+</head>
+<body>
+  <div class="container" id="formContainer">
+    <h1>Student Data Collection</h1>
+    <p class="desc">
+प्रिय शिक्षक साथियों आशा है आपके द्वारा कक्षा 6 से 8 के साथ आधाफुल कॉमिक बुक्स और डिजिटल कॉमिक्स पर काम किया जा रहा होगा। 
+आप सभी ने एक दिवसीय प्रशिक्षण के दौरान ऑनलाईन कोर्स कर लिया होगा। यह फॉर्म आपसे कुछ सरल जानकारियाँ प्राप्त करने के लिए भेजा जा रहा है।
+कक्षा 6 से 8 के उन सभी शिक्षकों द्वारा इस फॉर्म को भरा जाना   अनिवार्य है जिन्होंने सेल्फ़ एस्टीम और बॉडी कॉन्फिडेंस के एक दिवसीय प्रशिक्षण में भाग लिया है और कक्षा 6 से 8 के विद्यार्थियों के साथ कॉमिक बुक पर 6 सत्रों का आयोजन कर रहे हैं।
+कॉमिक बुक/डिजिटल कॉमिक्स पर काम करने के दौरान विद्यार्थियों द्वारा की गई गतिविधियों कुछ अच्छे फोटोज और वीडिओ साक्ष्य के रूप में इस फॉर्म के साथ जरूर अपलोड करें। बच्चो में आ रहे परिवर्तन को बता सकते है।
+यदि आपका कॉमिक बुक/डिजिटल कॉमिक्स पर कुछ फ़ीडबैक हो तो भी आप इसमें हमारे साथ साझा कर सकते हैं जो कार्यक्रम को प्रभावी बनाने में मदद करेंगे।
+    </p>
+
+    <form id="mainForm">
+      <!-- 1. Date -->
+      <label for="date">1. Date</label>
+      <input type="date" id="date" name="Date" required />
+
+      <!-- Cascading selects: District -> Block -> Panchayat -> School -> Teacher(Principal) -->
+      <label for="district">2. Name of District</label>
+      <select id="district" name="District" required>
+        <option value="">-- Select District --</option>
+      </select>
+
+      <label for="block">3. Name of Block</label>
+      <select id="block" name="Block" required>
+        <option value="">-- Select Block --</option>
+      </select>
+
+      <label for="panchayat">4. Name of Gram Panchayat</label>
+      <select id="panchayat" name="Panchayat" required>
+        <option value="">-- Select Panchayat --</option>
+      </select>
+
+      <label for="school">5. Name of School</label>
+      <select id="school" name="School" required>
+        <option value="">-- Select School --</option>
+      </select>
+
+      <!-- 6 & 7 Type of School I & II -->
+      <div class="row">
+        <div class="col">
+          <label for="schoolType1">6. Type of School - I</label>
+          <select id="schoolType1" name="TypeOfSchool_I" required>
+            <option value="">-- Select --</option>
+            <option value="class 1 to 8">a. class 1 to 8</option>
+            <option value="class 6-8">b. class 6-8</option>
+            <option value="class 6-12">c. class 6-12</option>
+            <option value="class 1-12">d. class 1-12</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <label for="schoolType2">7. Type of School - II</label>
+          <select id="schoolType2" name="TypeOfSchool_II" required>
+            <option value="">-- Select --</option>
+            <option value="Only Boys">a. Only Boys</option>
+            <option value="Only Girls">b. Only Girls</option>
+            <option value="Boys and Girls">c. Boys and Girls</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 8. Name of Teacher (this will be selected from Principal list) -->
+      <label for="teacherName">8. Name of Teacher</label>
+      <select id="teacherName" name="TeacherName" required>
+        <option value="">-- Select Teacher (Principal) --</option>
+      </select>
+
+      <!-- 9. Mobile Number -->
+      <label for="mobile">9. Mobile Number</label>
+      <input type="tel" id="mobile" name="MobileNumber" placeholder="10 digit mobile number" pattern="[0-9]{10}" required />
+
+      <!-- 10. Class taught -->
+      <label>10. कक्षा जिसमे आप शिक्षण कराते हैं?</label>
+      <div id="classTaught">
+        <label class="inline"><input type="checkbox" name="ClassTaught" value="कक्षा 6" /> कक्षा 6</label>
+        <label class="inline"><input type="checkbox" name="ClassTaught" value="कक्षा 7" /> कक्षा 7</label>
+        <label class="inline"><input type="checkbox" name="ClassTaught" value="कक्षा 8" /> कक्षा 8</label>
+        <label class="inline"><input type="checkbox" name="ClassTaught" value="कक्षा 9" /> कक्षा 9</label>
+        <label class="inline"><input type="checkbox" name="ClassTaught" value="कक्षा 10" /> कक्षा 10</label>
+      </div>
+
+      <!-- 11. Activities conducted? -->
+      <label>11. कॉमिक बुक/डिजिटल कॉमिक आधारित गतिविधियों का संचालन किया गया?</label>
+      <div class="radio-list">
+        <label><input type="radio" name="ActivitiesConducted" value="हां" required /> हां</label>
+        <label><input type="radio" name="ActivitiesConducted" value="नहीं" /> नहीं</label>
+      </div>
+
+      <!-- 12,13,14: class wise worked? -->
+      <label>12. कक्षा 6 के साथ कॉमिक बुक्स/डिजिटल कॉमिक्स पर कार्य किया गया?</label>
+      <label><input type="radio" name="Class6Worked" value="हाँ" required /> हाँ</label>
+      <label><input type="radio" name="Class6Worked" value="नहीं" /> नहीं</label>
+
+      <label>13. कक्षा 7 के साथ कॉमिक बुक्स/डिजिटल कॉमिक्स पर कार्य किया गया?</label>
+      <label><input type="radio" name="Class7Worked" value="हाँ" required /> हाँ</label>
+      <label><input type="radio" name="Class7Worked" value="नहीं" /> नहीं</label>
+
+      <label>14. कक्षा 8 के साथ कॉमिक बुक्स/डिजिटल कॉमिक्स पर कार्य किया गया?</label>
+      <label><input type="radio" name="Class8Worked" value="हाँ" required /> हाँ</label>
+      <label><input type="radio" name="Class8Worked" value="नहीं" /> नहीं</label>
+
+      <!-- 15-20: specific comic titles -->
+      <label>15. "खजाने का नक्शा" पर काम किया गया?</label>
+      <label><input type="radio" name="KhazaneKaNaksha" value="हाँ" /> हाँ</label>
+      <label><input type="radio" name="KhazaneKaNaksha" value="नहीं" /> नहीं</label>
+
+      <label>16. "बदलीपुर के चीते" पर काम किया गया?</label>
+      <label><input type="radio" name="BadlipurKeCheete" value="हाँ" /> हाँ</label>
+      <label><input type="radio" name="BadlipurKeCheete" value="नहीं" /> नहीं</label>
+
+      <label>17. "फिल्मस्टार का अपहरण" पर काम किया गया?</label>
+      <label><input type="radio" name="FilmstarApharan" value="हाँ" /> हाँ</label>
+      <label><input type="radio" name="FilmstarApharan" value="नहीं" /> नहीं</label>
+
+      <label>18. "गायब हाथी" पर काम किया गया?</label>
+      <label><input type="radio" name="GayabHati" value="हाँ" /> हाँ</label>
+      <label><input type="radio" name="GayabHati" value="नहीं" /> नहीं</label>
+
+      <label>19. "खतरे में बदलीपुर" पर काम किया गया?</label>
+      <label><input type="radio" name="KhatreMeinBadlipur" value="हाँ" /> हाँ</label>
+      <label><input type="radio" name="KhatreMeinBadlipur" value="नहीं" /> नहीं</label>
+
+      <label>20. "बोलती चट्टान" पर काम किया गया?</label>
+      <label><input type="radio" name="BoltiChattan" value="हाँ" /> हाँ</label>
+      <label><input type="radio" name="BoltiChattan" value="नहीं" /> नहीं</label>
+
+      <!-- 21-26: Numbers -->
+      <label>21. कक्षा 6 में लड़कों की संख्या</label>
+      <input type="number" name="Class6_Boys" min="0" />
+
+      <label>22. कक्षा 6 में लड़कियों की संख्या</label>
+      <input type="number" name="Class6_Girls" min="0" />
+
+      <label>23. कक्षा 7 में लड़कों की संख्या</label>
+      <input type="number" name="Class7_Boys" min="0" />
+
+      <label>24. कक्षा 7 में लड़कियों की संख्या</label>
+      <input type="number" name="Class7_Girls" min="0" />
+
+      <label>25. कक्षा 8 में लड़कों की संख्या</label>
+      <input type="number" name="Class8_Boys" min="0" />
+
+      <label>26. कक्षा 8 में लड़कियों की संख्या</label>
+      <input type="number" name="Class8_Girls" min="0" />
+
+      <!-- 27. Digital comics used? -->
+      <label>27. क्या आपके द्वारा विद्यालय में डिजिटल कॉमिक्स उपयोग में ली गई?</label>
+      <label><input type="radio" name="UsedDigitalComics" value="हाँ" /> हाँ</label>
+      <label><input type="radio" name="UsedDigitalComics" value="नहीं" /> नहीं</label>
+
+      <!-- 28. Platforms where students presented -->
+      <label>28. विद्यार्थियों ने किन-किन मंचों पर कॉमिक बुक्स/डिजिटल कॉमिक्स की कहानियों का प्रस्तुतीकरण किया है?</label>
+      <div class="checkbox-list">
+        <label><input type="checkbox" name="PresentationPlatform" value="प्रार्थना सभा" /> प्रार्थना सभा</label>
+        <label><input type="checkbox" name="PresentationPlatform" value="कक्षा में ही" /> कक्षा में ही</label>
+        <label><input type="checkbox" name="PresentationPlatform" value="एस एम सी की बैठक के समय" /> एस एम सी की बैठक के समय</label>
+        <label><input type="checkbox" name="PresentationPlatform" value="अभिभावक-शिक्षा बैठक" /> अभिभावक-शिक्षा बैठक</label>
+        <label><input type="checkbox" name="PresentationPlatform" value="नो बेग डे" /> नो बेग डे</label>
+        <label>अन्य: <input type="text" name="PresentationPlatform_Other" placeholder="अगर अन्य हो तो लिखें" /></label>
+      </div>
+
+      <!-- 29. Feedback -->
+      <label>29. Feedback & experience</label>
+      <textarea name="Feedback" placeholder="अपना अनुभव और फीडबैक यहाँ लिखें"></textarea>
+
+      <div class="buttons">
+        <button type="button" class="primary" id="submitBtn">Submit</button>
+        <button type="button" class="secondary" id="resetBtn">Reset</button>
+      </div>
+
+      <div class="success" id="successBox">धन्यवाद! आपका उत्तर सफलतापूर्वक भेज दिया गया है।</div>
+      <div class="error" id="errorBox"></div>
+    </form>
+  </div>
+
+  <script>
+    /***********************
+     * Embedded cascading data
+     * (District -> Block -> Panchayat -> School -> [Principals])
+     * This JSON was prepared from your uploaded Excel.
+     ***********************/
+    const cascade = JSON.parse(
+`/mnt/data/cascade_with_panchayat.json`
+    );
+
+    // UI elements
+    const districtEl = document.getElementById('district');
+    const blockEl = document.getElementById('block');
+    const panchayatEl = document.getElementById('panchayat');
+    const schoolEl = document.getElementById('school');
+    const teacherEl = document.getElementById('teacherName');
+
+    // Populate districts
+    function populateSelect(selectEl, items, placeholder) {
+      selectEl.innerHTML = '';
+      const opt0 = document.createElement('option');
+      opt0.value = '';
+      opt0.textContent = placeholder || '-- Select --';
+      selectEl.appendChild(opt0);
+      items.forEach(it => {
+        const o = document.createElement('option');
+        o.value = it;
+        o.textContent = it;
+        selectEl.appendChild(o);
+      });
+    }
+
+    populateSelect(districtEl, Object.keys(cascade).sort(), '-- Select District --');
+
+    districtEl.addEventListener('change', function() {
+      blockEl.innerHTML = '<option value="">-- Select Block --</option>';
+      panchayatEl.innerHTML = '<option value="">-- Select Panchayat --</option>';
+      schoolEl.innerHTML = '<option value="">-- Select School --</option>';
+      teacherEl.innerHTML = '<option value="">-- Select Teacher (Principal) --</option>';
+      if (!this.value) return;
+      const blocks = Object.keys(cascade[this.value] || {}).sort();
+      populateSelect(blockEl, blocks, '-- Select Block --');
+    });
+
+    blockEl.addEventListener('change', function() {
+      panchayatEl.innerHTML = '<option value="">-- Select Panchayat --</option>';
+      schoolEl.innerHTML = '<option value="">-- Select School --</option>';
+      teacherEl.innerHTML = '<option value="">-- Select Teacher (Principal) --</option>';
+      const d = districtEl.value;
+      if (!d || !this.value) return;
+      const panchayats = Object.keys(cascade[d][this.value] || {}).sort();
+      populateSelect(panchayatEl, panchayats, '-- Select Panchayat --');
+    });
+
+    panchayatEl.addEventListener('change', function() {
+      schoolEl.innerHTML = '<option value="">-- Select School --</option>';
+      teacherEl.innerHTML = '<option value="">-- Select Teacher (Principal) --</option>';
+      const d = districtEl.value, b = blockEl.value;
+      if (!d || !b || !this.value) return;
+      const schools = Object.keys(cascade[d][b][this.value] || {}).sort();
+      populateSelect(schoolEl, schools, '-- Select School --');
+    });
+
+    schoolEl.addEventListener('change', function() {
+      teacherEl.innerHTML = '<option value="">-- Select Teacher (Principal) --</option>';
+      const d = districtEl.value, b = blockEl.value, p = panchayatEl.value;
+      if (!d || !b || !p || !this.value) return;
+      const principals = cascade[d][b][p][this.value] || [];
+      populateSelect(teacherEl, principals, '-- Select Teacher (Principal) --');
+    });
+
+    // Utility to read form values (including checkboxes)
+    function getFormData(form) {
+      const fd = {};
+      const elements = form.elements;
+      for (let i=0; i<elements.length; i++) {
+        const el = elements[i];
+        if (!el.name) continue;
+        if (el.type === 'checkbox') {
+          if (!fd[el.name]) fd[el.name] = [];
+          if (el.checked) fd[el.name].push(el.value);
+        } else if (el.type === 'radio') {
+          if (el.checked) fd[el.name] = el.value;
+          else if (!(el.name in fd)) fd[el.name] = '';
+        } else {
+          fd[el.name] = el.value;
+        }
+      }
+      // convert arrays to comma-separated strings for checkboxes
+      for (const k in fd) {
+        if (Array.isArray(fd[k])) fd[k] = fd[k].join(', ');
+      }
+      return fd;
+    }
+
+    // Submit handler
+    document.getElementById('submitBtn').addEventListener('click', function() {
+      const form = document.getElementById('mainForm');
+      if (!form.reportValidity()) {
+        return;
+      }
+      const data = getFormData(form);
+
+      // endpoint: replace with your deployed Apps Script web app URL
+      const url = "https://script.google.com/macros/s/AKfycbxXtIdot8A5OT2mbDCnsYnWL1hllL73s65FMz49ckJg6ofM9QcXXBuAQOMI-5KTe3CCag/exec";
+
+      // Add timestamp and user-agent info
+      data._submittedAt = new Date().toISOString();
+
+      // Send POST
+      fetch(url, {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(r => r.json())
+      .then(resp => {
+        if (resp && resp.status === 'OK') {
+          document.getElementById('successBox').style.display = 'block';
+          document.getElementById('errorBox').style.display = 'none';
+          form.reset();
+          // reset selects
+          populateSelect(districtEl, Object.keys(cascade).sort(), '-- Select District --');
+          blockEl.innerHTML = '<option value="">-- Select Block --</option>';
+          panchayatEl.innerHTML = '<option value="">-- Select Panchayat --</option>';
+          schoolEl.innerHTML = '<option value="">-- Select School --</option>';
+          teacherEl.innerHTML = '<option value="">-- Select Teacher (Principal) --</option>';
+        } else {
+          document.getElementById('errorBox').textContent = 'सर्वर से जवाब में त्रुटि: ' + (resp && resp.message ? resp.message : JSON.stringify(resp));
+          document.getElementById('errorBox').style.display = 'block';
+          document.getElementById('successBox').style.display = 'none';
+        }
+      })
+      .catch(err => {
+        document.getElementById('errorBox').textContent = 'अपलोड करते समय त्रुटि: ' + err.message;
+        document.getElementById('errorBox').style.display = 'block';
+        document.getElementById('successBox').style.display = 'none';
+      });
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function() {
+      document.getElementById('mainForm').reset();
+      document.getElementById('successBox').style.display = 'none';
+      document.getElementById('errorBox').style.display = 'none';
+      populateSelect(districtEl, Object.keys(cascade).sort(), '-- Select District --');
+      blockEl.innerHTML = '<option value="">-- Select Block --</option>';
+      panchayatEl.innerHTML = '<option value="">-- Select Panchayat --</option>';
+      schoolEl.innerHTML = '<option value="">-- Select School --</option>';
+      teacherEl.innerHTML = '<option value="">-- Select Teacher (Principal) --</option>';
+    });
+  </script>
+</body>
+</html>
